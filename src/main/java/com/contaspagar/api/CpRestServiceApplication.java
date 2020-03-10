@@ -1,4 +1,4 @@
-package com.contaspagar.api.cprestservice;
+package com.contaspagar.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.contaspagar.api.cprestservice;
+package com.contaspagar.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

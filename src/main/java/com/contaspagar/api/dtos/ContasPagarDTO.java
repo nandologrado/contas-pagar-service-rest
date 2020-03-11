@@ -2,6 +2,7 @@ package com.contaspagar.api.dtos;
 
 import com.contaspagar.api.entities.ContasPagar;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,7 @@ import static java.util.Objects.isNull;
 @Builder
 @Data
 @JsonIgnoreProperties
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ContasPagarDTO implements Serializable {
     private static final long serialVersionUID = 5735596859156272751L;
 

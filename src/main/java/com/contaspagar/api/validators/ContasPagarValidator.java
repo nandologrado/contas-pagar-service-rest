@@ -18,7 +18,7 @@ public class ContasPagarValidator {
         }
 
         if (isNull(contasPagarDTO.getValorOriginal())) {
-            result.addError(new ObjectError("ContasPagar", "O valor não foi informado"));
+            result.addError(new ObjectError("ContasPagar", "O valor original não foi informado"));
         }
 
         if (isNull(contasPagarDTO.getDtVencimento())) {

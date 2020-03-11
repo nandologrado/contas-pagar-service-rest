@@ -23,6 +23,7 @@ public class ContasPagarDTO implements Serializable {
 
     private String nome;
     private BigDecimal valorOriginal;
+    private BigDecimal valorCorrigdo;
     private BigDecimal valorMulta;
     private LocalDate dtPagamento;
     private LocalDate dtVencimento;
@@ -51,7 +52,7 @@ public class ContasPagarDTO implements Serializable {
         return ContasPagarDTO.builder()
                 .nome(contasPagar.getNome())
                 .valorOriginal(contasPagar.getValorOriginal())
-                .valorMulta(BigDecimal.valueOf(0.0))
+                .valorCorrigdo(contasPagar.getValorOriginal().add(contasPagar.getValorMulta()))
                 .qtdDiasAtraso(contasPagar.getQtdDiasAtraso())
                 .dtPagamento(contasPagar.getDtPagamento())
                 .build();

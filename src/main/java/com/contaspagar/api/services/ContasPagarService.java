@@ -1,9 +1,7 @@
 package com.contaspagar.api.services;
 
 import com.contaspagar.api.entities.ContasPagar;
-import com.contaspagar.api.enums.PeriodoAtrasoMultaEnum;
 import com.contaspagar.api.repositories.ContasPagarRespository;
-import com.contaspagar.api.strategy.multaatraso.MultaAteTresDias;
 import com.contaspagar.api.strategy.multaatraso.MultaAtraso;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

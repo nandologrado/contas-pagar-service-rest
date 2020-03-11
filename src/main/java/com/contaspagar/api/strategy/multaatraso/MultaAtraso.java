@@ -5,5 +5,11 @@ import java.math.BigDecimal;
 public interface MultaAtraso {
     BigDecimal calcularMulta(BigDecimal valor, Long diasAtraso);
 
-    Long getAtrasoMaximo();
+    Integer getAtrasoMinimo();
+
+    Integer getAtrasoMaximo();
+
+    double getMulta();
+
+    double getJurosDia();
 }

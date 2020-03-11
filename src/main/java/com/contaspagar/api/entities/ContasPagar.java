@@ -14,13 +14,12 @@ import java.time.LocalDate;
 @Entity
 @ToString()
 @Table(name = "contas_pagar")
-@SequenceGenerator(name = "seq_contas_pagar", sequenceName = "contas_pagar", allocationSize = 1)
 public class ContasPagar implements Serializable {
     private static final long serialVersionUID = 1986102946303601488L;
 
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_item_pagar")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nome", nullable = false)
@@ -35,7 +34,16 @@ public class ContasPagar implements Serializable {
     @Column(name = "valor_original", nullable = false)
     private BigDecimal valorOriginal;
 
+    @Column(name = "valor_multa", nullable = false)
+    private BigDecimal valorMulta;
+
     @Column(name = "dias_atraso", nullable = false)
     private Long qtdDiasAtraso;
+
+    @Column(name = "multa", nullable = false)
+    private double multa;
+
+    @Column(name = "juros", nullable = false)
+    private double juros;
 
 }

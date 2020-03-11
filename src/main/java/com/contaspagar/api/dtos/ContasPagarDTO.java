@@ -23,10 +23,12 @@ public class ContasPagarDTO implements Serializable {
 
     private String nome;
     private BigDecimal valorOriginal;
-    private BigDecimal valorCorrigido;
+    private BigDecimal valorMulta;
     private LocalDate dtPagamento;
     private LocalDate dtVencimento;
-    private Integer qtdDiasAtraso;
+    private Long qtdDiasAtraso;
+    private Double juros;
+    private Double multa;
 
    public ContasPagar toEntity(){
         return ContasPagar.builder()
@@ -34,7 +36,10 @@ public class ContasPagarDTO implements Serializable {
                 .dtPagamento(this.dtPagamento)
                 .dtVencimento(this.dtVencimento)
                 .valorOriginal(this.valorOriginal)
+                .valorMulta(isNull(this.valorMulta) ? BigDecimal.valueOf(0.0) : this.valorMulta)
                 .qtdDiasAtraso(isNull(this.qtdDiasAtraso) ? 0 : this.qtdDiasAtraso)
+                .juros(isNull(this.juros) ? 0 : this.juros)
+                .multa(isNull(this.multa) ? 0 : this.multa)
                 .build();
     }
 
@@ -46,7 +51,7 @@ public class ContasPagarDTO implements Serializable {
         return ContasPagarDTO.builder()
                 .nome(contasPagar.getNome())
                 .valorOriginal(contasPagar.getValorOriginal())
-                .valorCorrigido(BigDecimal.valueOf(0.0))
+                .valorMulta(BigDecimal.valueOf(0.0))
                 .qtdDiasAtraso(contasPagar.getQtdDiasAtraso())
                 .dtPagamento(contasPagar.getDtPagamento())
                 .build();

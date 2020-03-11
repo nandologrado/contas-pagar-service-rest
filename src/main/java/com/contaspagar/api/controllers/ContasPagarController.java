@@ -12,13 +12,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -27,12 +25,13 @@ public class ContasPagarController {
 
     private static final Logger log = LoggerFactory.getLogger(ContasPagarController.class);
 
-    @Autowired
     ContasPagarService contasPagarService;
 
     private int qtdPorPagina = 20;
 
-    public ContasPagarController() {
+    @Autowired
+    public ContasPagarController(ContasPagarService contasPagarService) {
+        this.contasPagarService = contasPagarService;
     }
 
     /**
@@ -52,6 +51,8 @@ public class ContasPagarController {
             log.error("Erro validando dados de cadastro Contas a Pagar: {}", result.getAllErrors());
             result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(response);
+
+
         }
 
         this.contasPagarService.salvar(contasPagar);
@@ -69,11 +70,12 @@ public class ContasPagarController {
     @GetMapping(value = "/listar-contas-cadastradas")
     public ResponseEntity<Response<Page<ContasPagarDTO>>> listarContasCadastradas(
             @RequestParam(value = "pag", defaultValue = "0") int pag,
+            @RequestParam(value = "ord", defaultValue = "dtVencimento") String ord,
             @RequestParam(value = "dir", defaultValue = "DESC") String dir) {
         log.info("Buscando contas cadastradas: {}, página: {}",  pag);
         Response<Page<ContasPagarDTO>> response = new Response<>();
 
-        Pageable pageable = PageRequest.of(pag, this.qtdPorPagina, Sort.Direction.valueOf(dir));
+        Pageable pageable = PageRequest.of(pag, this.qtdPorPagina, Sort.Direction.valueOf(dir),ord);
 
         Page<ContasPagar> contas = this.contasPagarService.buscarContasCadastradas(pageable);
         Page<ContasPagarDTO> contasDto = contas.map(ContasPagarDTO::valueOf);
